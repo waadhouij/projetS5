@@ -1,0 +1,70 @@
+{#{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}#}
+
+{{ form_start(form) }}
+
+    <div class="ui form sixteen center aligned" style="padding: 0em 4em;">
+        <div class="row">
+            <div class="field" style="padding: 1em;">
+                <label for="nom_prenom">
+                    {{ form_label(form.nom) }}
+                </label>
+                {{ form_widget(form.nom, { 'attr':{'id':'nom'} }) }}
+            </div>
+            {% if form.nom.vars.errors|length>0 %}
+                <div class="ui text left aligned myred">
+                    {{ form_errors(form.nom) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row" style="padding: 1em;  margin-top: 0.5em; ">
+            <div class="field">
+                <label for="auteur_sexe">
+                    {{ form_label(form.lieu) }}
+                </label>
+                {{ form_widget(form.lieu) }}
+            </div>
+            {% if form.lieu.vars.errors|length>0 %}
+                <div class="ui text left aligned myred">
+                    {{ form_errors(form.lieu) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row" style="padding: 1em;  margin-top: 0.5em; ">
+            <div class="field">
+                <label for="auteur_sexe">
+                    {{ form_label(form.description) }}
+                </label>
+                {{ form_widget(form.description) }}
+            </div>
+            {% if form.description.vars.errors|length>0 %}
+                <div class="ui text left aligned myred">
+                    {{ form_errors(form.description) }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row" style="padding: 1em;  margin-top: 0.5em; ">
+            <div class="field">
+                <label for="auteur_date_de_naissance">
+                    {{ form_label(form.date) }}
+                </label>
+                {{ form_widget(form.date) }}
+            </div>
+            {% if form.date.vars.errors|length>0 %}
+                <div class="ui text left aligned myred">
+                    {{ form_errors(form.date) }}
+                </div>
+            {% endif %}
+        </div>
+
+
+    </div>
+
+    <button class="ui button blue" type="submit" style="display: block; margin: 9px auto; width: fit-content;" > <i class="icon save"></i> {{ button_label|default('Create') }}</button>
+
+{{ form_end(form) }}

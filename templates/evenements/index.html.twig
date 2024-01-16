@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements index{% endblock %}
+
+{% block body %}
+<div class="contentWrapper">
+
+        <div class="ui segment sixteen  column wide items" style="padding: 1em 1.5em; border: 1px solid gray; background-color: #fffffdc7;">
+            <h1 class="ui header center aligned customClass pt-0 violet huge"> Events management </h1>
+        </div>
+
+        <div class="ui segment sixteen  column wide items" style="padding: 1em 1.5em; border: 1px solid gray; background-color: #fffffdc7;">
+            <div class="ui grid three column">
+                <div class="ui column left floated">
+                    <form action="{{ path('cp_evenements_index') }}" method="get">
+                        
+                    </form>
+                </div>
+                <div class="column right floated customClass text-right">
+                    <a href="{{ path('evenements_new') }}" class="ui button positive"> <i class="icon plus"></i> Create new </a>
+                </div>
+            </div>
+
+
+            <table class="ui selectable striped customClass table center middle aligned">
+                <thead>
+                    <tr>
+                        <th><strong> # </strong></th>
+                        <th>Nom</th>
+                        <th>Lieu</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% set i=0 %}
+                {% for evenement in evenements %}
+                    {% set i=1+i %}
+                    <tr>
+                        
+                        <td>{{ evenement.id }}</td>
+                        <td>{{ evenement.nom }}</td>
+                        <td>{{ evenement.lieu }}</td>
+                        <td>{{ evenement.description }}</td>
+                        <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                         <td>
+                {% for images in evenement.images %}
+              <a href="{{ asset ('/uploads/' ~ images.name ) }}" alt="image" width="3000""><img src="{{ asset ('/uploads/' ~ images.name ) }}" alt="images" width="300"></a>
+                {% endfor %}
+                </td>
+                        
+                        <td>
+                            <a href="{{ path('evenements_show', {'id': evenement.id}) }}" title="view">
+                                <i class="icon eye teal"> </i>
+                            </a>
+                            <a href="{{ path('evenements_edit', {'id': evenement.id}) }}" title="Edit">
+                                <i class="pencil alternate icon olive"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+{% endblock %}

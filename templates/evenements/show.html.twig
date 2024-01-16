@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements{% endblock %}
+
+{% block body %}
+<div class="contentWrapper" style="padding: 1em">
+        <div class="ui segment sixteen column wide items" style="padding: 1em; border: 1px solid gray; background-color: #fffffdc7;">
+            <div style="display: flex;align-content: center;justify-content: space-between;align-items: center;">
+                <h5 class="ui header customClass pb-0 left aligned">
+                    <a href="{{ path("evenements_index") }}"> <i class="icon left arrow" ></i> Go Back to events list  </a>
+                </h5>
+                
+                    <div>
+                        <a href="{{ path('evenements_edit', {'id': evenement.id}) }}" class="ui button olive" style="display: inline-block; width: fit-content;" > <i class="edit icon"></i> Edit </a>
+                        {{ include('evenements/_delete_form.html.twig') }}
+                    </div>
+                
+            </div>
+        </div>
+
+        <div class="ui segment sixteen column wide items" style="padding: 1em; border: 1px solid gray; background-color: #fffffdc7;">
+            <div class="ui items">
+                <div class="item" style=" padding: 1em 2.8em; margin: 0 auto;">
+                    <div class="image">
+                        <td>
+                {% for images in evenement.images %}
+              <a href="{{ asset ('/uploads/' ~ images.name ) }}" alt="image" width="3000""><img src="{{ asset ('/uploads/' ~ images.name ) }}" alt="images" width="450"></a>
+                {% endfor %}
+                </td>
+
+                    </div>
+                    <div class="content" style="flex-direction: column;display: flex;justify-content: center;">
+                        <h1 class="ui header huge center aligned"> {{ evenement.nom }} </h1>
+                        <div class="description">
+                            <h3 class="ui header center aligned"> <strong style="text-decoration: underline; margin-right: 6px;" class="meta"> Lieu : </strong>  {{ evenement.lieu }} </h3>
+                            <h3 class="ui header center aligned"> <strong style="text-decoration: underline; margin-right: 6px;" class="meta"> Description : </strong>  {{ evenement.description }} </h3>
+                            <h3 class="ui header center aligned"> <strong style="text-decoration: underline; margin-right: 6px;" class="meta"> Date : </strong> {{ evenement.date|date('d/m/Y') }}  </h3>
+                        </div>
+                        
+                    
+                        {% if app.flashes('editted')|length>0 %}
+                            <div class="ui green message">
+                                <div class="header" style="text-align: center;">
+                                    Event changes were successfuly saved
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if app.flashes('created')|length>0 %}
+                            <div class="ui green message">
+                                <div class="header" style="text-align: center;">
+                                    Event created successfuly
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+{% endblock %}
